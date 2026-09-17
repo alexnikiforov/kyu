@@ -11,8 +11,7 @@ window.KYU_TECHNIQUES = {
    "ordinal": "6th",
    "belt": {
     "name": "White",
-    "hex": "#E8E8E8",
-    "text": "#1a1a1a"
+    "hex": "#dfe7f2"
    },
    "kind": "vocabulary",
    "itemCount": 22,
@@ -25,8 +24,7 @@ window.KYU_TECHNIQUES = {
    "ordinal": "5th",
    "belt": {
     "name": "Yellow",
-    "hex": "#F2C14E",
-    "text": "#1a1a1a"
+    "hex": "#d8bd6a"
    },
    "kind": "techniques",
    "itemCount": 18,
@@ -250,8 +248,7 @@ window.KYU_TECHNIQUES = {
    "ordinal": "4th",
    "belt": {
     "name": "Orange",
-    "hex": "#E8833A",
-    "text": "#1a1a1a"
+    "hex": "#cf8352"
    },
    "kind": "techniques",
    "itemCount": 22,
@@ -515,8 +512,7 @@ window.KYU_TECHNIQUES = {
    "ordinal": "3rd",
    "belt": {
     "name": "Green",
-    "hex": "#4C9A5B",
-    "text": "#ffffff"
+    "hex": "#5f9e79"
    },
    "kind": "techniques",
    "itemCount": 28,
@@ -848,8 +844,7 @@ window.KYU_TECHNIQUES = {
    "ordinal": "2nd",
    "belt": {
     "name": "Blue",
-    "hex": "#3B76B8",
-    "text": "#ffffff"
+    "hex": "#5b8fc9"
    },
    "kind": "techniques",
    "itemCount": 30,
@@ -1200,8 +1195,7 @@ window.KYU_TECHNIQUES = {
    "ordinal": "1st",
    "belt": {
     "name": "Brown",
-    "hex": "#7A5237",
-    "text": "#ffffff"
+    "hex": "#9c7a5f"
    },
    "kind": "techniques",
    "itemCount": 18,

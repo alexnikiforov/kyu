@@ -1,4 +1,4 @@
-/* Judo Kyu Guide - page controllers.
+/* JC Dojo Kyiv Kyu Guide - page controllers.
 
    Each page sets data-page on <body> and, for level pages, data-kyu.
    This file wires up the shared header, then renders the right page. */
@@ -9,8 +9,8 @@
   var R = window.KyuRender;
   var store = window.KyuStore;
 
-  /* Simple pages (404) only load store.js + app.js for the theme toggle,
-     so nothing here may assume the renderer or the data files are present. */
+  /* Simple pages (404) only load store.js + app.js, so nothing here may assume
+     the renderer or the data files are present. */
   function el(tag, className, text) {
     if (R) return R.el(tag, className, text);
     var node = document.createElement(tag);
@@ -23,27 +23,6 @@
   var unlearnedOnly = null;
 
   /* ------------------------------------------------------------ shared UI */
-
-  function initThemeToggle() {
-    var btn = document.querySelector('[data-theme-toggle]');
-    if (!btn) return;
-
-    function label() {
-      var active = store.storedTheme() || store.systemTheme();
-      btn.textContent = active === 'dark' ? '\u2600' : '\u263D';
-      btn.setAttribute(
-        'aria-label',
-        active === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
-      );
-      btn.title = btn.getAttribute('aria-label');
-    }
-
-    label();
-    btn.addEventListener('click', function () {
-      store.toggleTheme();
-      label();
-    });
-  }
 
   function initStorageNotice() {
     var notice = document.querySelector('[data-storage-notice]');
@@ -347,7 +326,6 @@
   /* ---------------------------------------------------------------- boot */
 
   function boot() {
-    initThemeToggle();
     initStorageNotice();
 
     var page = document.body.dataset.page;

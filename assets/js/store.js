@@ -1,11 +1,12 @@
-/* Judo Kyu Guide - storage, theme and speech helpers.
-   Loaded before render.js and app.js on every page. */
+/* JC Dojo Kyiv Kyu Guide - progress storage.
+   Loaded before render.js and app.js on every page.
+
+   The site is dark-only, so there is no theme state to keep here. */
 
 (function () {
   'use strict';
 
   var PREFIX = 'kyu:';
-  var THEME_KEY = PREFIX + 'theme';
 
   /* ------------------------------------------------------------ storage */
 
@@ -103,44 +104,9 @@
     write(DONE_KEY, JSON.stringify(done));
   }
 
-  /* -------------------------------------------------------------- theme */
-
-  function storedTheme() {
-    var value = read(THEME_KEY);
-    return value === 'light' || value === 'dark' ? value : null;
-  }
-
-  function systemTheme() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-  }
-
-  function applyTheme(theme) {
-    if (theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-  }
-
-  function setTheme(theme) {
-    if (theme) {
-      write(THEME_KEY, theme);
-    } else {
-      drop(THEME_KEY);
-    }
-    applyTheme(theme);
-  }
-
-  function toggleTheme() {
-    var current = storedTheme() || systemTheme();
-    var next = current === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    return next;
-  }
-
-  applyTheme(storedTheme());
+  /* Left over from an earlier theme toggle: clear the stale key once so it does
+     not sit in localStorage forever. */
+  drop(PREFIX + 'theme');
 
   window.KyuStore = {
     isPersistent: function () {
@@ -149,10 +115,6 @@
     isDone: isDone,
     setDone: setDone,
     countDone: countDone,
-    clearDone: clearDone,
-    storedTheme: storedTheme,
-    systemTheme: systemTheme,
-    setTheme: setTheme,
-    toggleTheme: toggleTheme
+    clearDone: clearDone
   };
 })();

@@ -1,4 +1,4 @@
-/* Judo Kyu Guide - DOM builders.
+/* JC Dojo Kyiv Kyu Guide - DOM builders.
    Everything is built with createElement/textContent, never innerHTML. */
 
 (function () {
@@ -25,9 +25,10 @@
     return null;
   }
 
+  /* Only the hue is exposed: the belt colour drives a dot and a progress fill,
+     never a filled surface, so it needs no paired text colour. */
   function beltVars(node, belt) {
     node.style.setProperty('--belt', belt.hex);
-    node.style.setProperty('--belt-text', belt.text);
   }
 
   /* --------------------------------------------------------- speak button */

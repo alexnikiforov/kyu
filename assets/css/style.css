@@ -1,72 +1,85 @@
-/* Judo Kyu Guide - single stylesheet, no build step, no frameworks. */
+/* JC Dojo Kyiv Kyu Guide - single stylesheet, no build step, no frameworks.
+
+   Design language: "frosted glass cathedral at midnight" (see design.md).
+   Dark-only by design - there is no light theme and no prefers-color-scheme
+   branch, so every token below is the single source of truth.
+
+   Two rules carry most of the look:
+     1. Borders are never solid strokes - they are `inset 0 0 0 1px` shadows of
+        frosted blue-white, so edges glow instead of cutting.
+     2. Elevation is inset highlight + inset glow + cool drop, never a plain
+        drop-shadow. */
 
 :root {
-  --bg: #f6f7f9;
-  --bg-card: #ffffff;
-  --bg-sunken: #eceef1;
-  --text: #16191d;
-  --text-dim: #5d646e;
-  --text-faint: #8b929c;
-  --border: #dde1e6;
-  --border-strong: #c3c9d1;
-  --accent: #b3271f;
-  --accent-text: #ffffff;
-  --ok: #2f7d43;
-  --shadow: 0 1px 2px rgba(16, 20, 26, 0.06), 0 4px 12px rgba(16, 20, 26, 0.05);
-  --radius: 12px;
-  --radius-sm: 8px;
-  --maxw: 900px;
-  --belt: var(--border-strong);
-  --belt-text: var(--text);
+  /* --------------------------------------------------------- design tokens */
+  --color-midnight-canvas: #05060f;
+  --color-fog-veil: #9da7ba;
+  --color-moon-mist: #c7d3ea;
+  --color-frost-glow: #d1e4fa;
+  --color-ice-highlight: #d8ecf8;
+  --color-pure-white: #ffffff;
+  --color-void-violet: #663af3;
+  --gradient-skywash: linear-gradient(180deg, #d8ecf8 0%, #98c0ef 100%);
+
+  /* Hairlines. 0.12 is the ambient edge; interactive controls step up to 0.24
+     so their outline clears the WCAG 3:1 floor for UI components. */
+  --edge: rgba(186, 215, 247, 0.12);
+  --edge-strong: rgba(186, 215, 247, 0.24);
+  --hairline: inset 0 0 0 1px var(--edge);
+  --hairline-strong: inset 0 0 0 1px var(--edge-strong);
+
+  /* Translucent surfaces, brightest last. */
+  --surface-glass: rgba(186, 214, 247, 0.03);
+  --surface-wash: rgba(186, 214, 247, 0.06);
+  --surface-wash-hi: rgba(186, 214, 247, 0.12);
+  --surface-deep: rgba(5, 6, 15, 0.72);
+
+  /* --------------------------------------------------------------- aliases */
+  --bg: var(--color-midnight-canvas);
+  --text: var(--color-frost-glow);
+  --text-head: var(--color-ice-highlight);
+  --text-dim: var(--color-moon-mist);
+  --text-faint: var(--color-fog-veil);
+  --accent: var(--color-void-violet);
+  --accent-text: var(--color-pure-white);
+
+  /* ------------------------------------------------------------- elevation */
+  --glow-sm: 0 0 6px rgba(186, 207, 247, 0.32);
+  --lift-card: inset 0 1px 1px rgba(199, 211, 234, 0.12),
+    inset 0 24px 48px rgba(199, 211, 234, 0.05),
+    0 24px 32px rgba(6, 6, 14, 0.7);
+  --lift-modal: inset 0 1px 1px rgba(216, 236, 248, 0.2),
+    inset 0 24px 48px rgba(168, 216, 245, 0.06),
+    0 16px 32px rgba(0, 0, 0, 0.3);
+
+  /* ------------------------------------------------------------ typography */
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  /* Avenir Next at weight 500 gives the wide, calm display presence the system
+     asks for; it degrades to Segoe UI / Roboto elsewhere without reflowing. */
+  --font-display: "Avenir Next", Avenir, "Segoe UI Variable Display", "Segoe UI",
+    "Helvetica Neue", -apple-system, sans-serif;
+  --font-eyebrow: ui-monospace, SFMono-Regular, Menlo, Consolas,
+    "Liberation Mono", monospace;
+  /* Explicit Japanese stack: without it macOS can pick Hiragino Sans GB, which
+     renders Simplified Chinese glyph forms for shared kanji. */
+  --font-ja: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium",
+    "Yu Gothic", "Noto Sans JP", "MS Gothic", sans-serif;
+
+  /* ---------------------------------------------------------------- shapes */
+  --radius-card: 16px;
+  --radius-input: 6px;
+  --radius-pill: 999px;
+  --maxw: 1120px;
+  --maxw-read: 860px;
+  --header-h: 56px;
+
+  /* Overridden per level by the belt colour. Only the hue is needed: the belt is
+     never used as a fill, so it has no paired foreground colour. */
+  --belt: var(--color-moon-mist);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14171b;
-    --bg-card: #1c2026;
-    --bg-sunken: #23282f;
-    --text: #e8eaed;
-    --text-dim: #a3abb6;
-    --text-faint: #7b838e;
-    --border: #2e343c;
-    --border-strong: #3d444e;
-    --accent: #e2564c;
-    --accent-text: #14171b;
-    --ok: #57b26f;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.3);
-  }
-}
-
-/* Explicit override wins over the media query. */
-html[data-theme="light"] {
-  --bg: #f6f7f9;
-  --bg-card: #ffffff;
-  --bg-sunken: #eceef1;
-  --text: #16191d;
-  --text-dim: #5d646e;
-  --text-faint: #8b929c;
-  --border: #dde1e6;
-  --border-strong: #c3c9d1;
-  --accent: #b3271f;
-  --accent-text: #ffffff;
-  --ok: #2f7d43;
-  --shadow: 0 1px 2px rgba(16, 20, 26, 0.06), 0 4px 12px rgba(16, 20, 26, 0.05);
-}
-
-html[data-theme="dark"] {
-  --bg: #14171b;
-  --bg-card: #1c2026;
-  --bg-sunken: #23282f;
-  --text: #e8eaed;
-  --text-dim: #a3abb6;
-  --text-faint: #7b838e;
-  --border: #2e343c;
-  --border-strong: #3d444e;
-  --accent: #e2564c;
-  --accent-text: #14171b;
-  --ok: #57b26f;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.3);
-}
+/* ============================================================ foundations */
 
 *,
 *::before,
@@ -74,18 +87,74 @@ html[data-theme="dark"] {
   box-sizing: border-box;
 }
 
+/* The canvas colour lives on <html>, never on <body>. The ambient layers below
+   are body::before / body::after with a negative z-index, and those paint above
+   the root background but *underneath* any background on body itself - body has
+   no stacking context of its own, so an opaque body background would hide them
+   completely. */
 html {
   -webkit-text-size-adjust: 100%;
+  background: var(--bg);
 }
 
 body {
   margin: 0;
-  padding: 0 1rem 4rem;
-  background: var(--bg);
+  padding: 0 1rem 5rem;
   color: var(--text);
-  font: 400 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  font: 400 16px/1.5 var(--font-ui);
+  letter-spacing: -0.01em;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Ambient blueprint grid - fixed, so it never scrolls with the content. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+      to right,
+      rgba(186, 215, 247, 0.06) 0 1px,
+      transparent 1px 80px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(186, 215, 247, 0.06) 0 1px,
+      transparent 1px 80px
+    );
+  -webkit-mask-image: radial-gradient(ellipse 100% 70% at 50% 0%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 100% 70% at 50% 0%, #000 30%, transparent 75%);
+}
+
+/* Conic spotlight halo anchoring the top of the page. */
+body::after {
+  content: "";
+  position: fixed;
+  /* Pinned to both edges instead of a 160vw box centred with translateX: a
+     fixed element wider than the viewport enlarges the scrollable overflow
+     area, which produced a horizontal scrollbar on narrow screens. The conic
+     gradient is already centred by `at 50% -5%`, so no extra width is needed. */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70vh;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.55;
+  background: conic-gradient(
+    at 50% -5%,
+    transparent 45%,
+    rgba(124, 145, 182, 0.3) 49%,
+    rgba(124, 145, 182, 0.5) 50%,
+    rgba(124, 145, 182, 0.3) 51%,
+    transparent 55%
+  );
+  /* Without this the beam ends on a hard horizontal line and visibly brightens
+     whatever card it lands on; fade it out well before the content starts. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
 }
 
 .wrap {
@@ -94,11 +163,14 @@ body {
 }
 
 a {
-  color: var(--accent);
+  color: var(--text);
+  text-decoration-color: var(--edge-strong);
+  text-underline-offset: 2px;
 }
 
 a:hover {
-  text-decoration: none;
+  color: var(--color-ice-highlight);
+  text-decoration-color: currentColor;
 }
 
 :focus-visible {
@@ -107,119 +179,251 @@ a:hover {
   border-radius: 4px;
 }
 
-/* ---------------------------------------------------------------- header */
+[lang="ja"] {
+  font-family: var(--font-ja);
+}
+
+/* ================================================================= header */
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1.25rem 0 1rem;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  /* Fixed height so the full-bleed bar below can match it exactly. */
+  height: var(--header-h);
+}
+
+/* The frosted bar is a separate fixed layer rather than an absolute one bleeding
+   to -50vw: an absolute element wider than the viewport adds a horizontal
+   scrollbar, and `overflow-x: hidden` on html/body would break position:sticky.
+   The header is always the first element on the page, so top:0 lines up. */
+.site-header::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  z-index: -1;
+  background: var(--surface-deep);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 -1px 0 var(--edge);
 }
 
 .site-header h1,
 .site-header .brand {
   margin: 0;
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
   color: var(--text);
   text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header .brand:hover {
+  color: var(--color-ice-highlight);
 }
 
 .site-header .spacer {
   flex: 1;
 }
 
-.btn {
+/* ================================================================ buttons */
+
+/* Every interactive pill shares this shape: 999px radius, frost wash fill and
+   a 1px inset hairline instead of a border. */
+.btn,
+.act,
+.toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  min-height: 38px;
-  padding: 0 0.85rem;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  background: var(--bg-card);
-  color: var(--text);
-  font-size: 0.875rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface-wash);
+  box-shadow: var(--hairline-strong);
+  color: var(--color-pure-white);
   font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.12s ease, border-color 0.12s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
 }
 
-.btn:hover {
-  background: var(--bg-sunken);
-  border-color: var(--text-faint);
+.btn {
+  min-height: 36px;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
 }
 
-.btn:active {
-  transform: translateY(1px);
+.btn:hover,
+.toggle:hover {
+  background: var(--surface-wash-hi);
 }
 
 .btn-icon {
-  min-width: 38px;
+  min-width: 36px;
   padding: 0;
   font-size: 1rem;
 }
 
-/* ------------------------------------------------------------ breadcrumb */
+/* ============================================================= eyebrow row */
 
-.breadcrumb {
-  font-size: 0.85rem;
+/* All-caps section marker flanked by fading hairlines. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1rem;
+  font-family: var(--font-eyebrow);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--text-dim);
-  padding-bottom: 0.5rem;
+  font-feature-settings: "tnum" on;
 }
 
-.breadcrumb a {
-  color: var(--text-dim);
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--edge), transparent);
 }
 
-/* ------------------------------------------------------------- page head */
+.eyebrow.is-start::before {
+  display: none;
+}
+
+/* ============================================================== hero head */
 
 .page-head {
-  margin: 0.5rem 0 1.5rem;
-  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-left: 6px solid var(--belt);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  margin: 2rem 0 2.5rem;
+  padding: 1.5rem;
+  background: var(--surface-glass);
+  border-radius: var(--radius-card);
+  box-shadow: var(--lift-card);
+}
+
+.page-head.is-hero {
+  margin: 3.5rem 0 3rem;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  text-align: center;
 }
 
 .page-head h1 {
-  margin: 0 0 0.15rem;
-  font-size: 1.6rem;
-  letter-spacing: -0.02em;
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.01em;
+  color: var(--text-head);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* The hero wordmark is the one place the Skywash gradient is allowed. */
+.page-head.is-hero h1 {
+  display: block;
+  font-size: clamp(2.5rem, 11vw, 4.5rem);
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  background: var(--gradient-skywash);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  padding-bottom: 0.1em;
 }
 
 .page-head .sub {
   margin: 0;
   color: var(--text-dim);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  max-width: var(--maxw-read);
 }
 
+.page-head.is-hero .sub {
+  margin: 0 auto;
+  font-size: 1rem;
+  max-width: 44rem;
+}
+
+.page-head.is-hero .progress {
+  max-width: 30rem;
+  margin: 2rem auto 0;
+}
+
+/* ================================================================== belts */
+
+/* The belt colour is a signal, not a fill: a small dot plus the progress bar.
+   Large tinted areas would fight the monochrome system. */
 .belt-chip {
-  display: inline-block;
-  padding: 0.15rem 0.6rem;
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-input);
+  background: var(--surface-wash-hi);
+  box-shadow: var(--hairline);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.belt-chip::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   background: var(--belt);
-  color: var(--belt-text);
-  font-size: 0.78rem;
-  font-weight: 600;
-  vertical-align: 2px;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--belt) 60%, transparent);
+  flex: none;
 }
 
-/* -------------------------------------------------------------- progress */
+/* ============================================================= breadcrumb */
 
-.progress {
-  margin-top: 0.85rem;
+.breadcrumb {
+  padding: 1.25rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--text-faint);
 }
+
+.breadcrumb a {
+  color: var(--text-dim);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--text-head);
+  text-decoration: underline;
+}
+
+/* =============================================================== progress */
 
 .progress-bar {
-  height: 8px;
-  background: var(--bg-sunken);
-  border-radius: 999px;
+  height: 6px;
+  background: rgba(199, 211, 234, 0.06);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--hairline);
   overflow: hidden;
 }
 
@@ -227,29 +431,31 @@ a:hover {
   height: 100%;
   width: 0;
   background: var(--belt);
-  border-radius: 999px;
-  transition: width 0.25s ease;
+  border-radius: var(--radius-pill);
+  transition: width 0.3s ease, background-color 0.3s ease;
 }
 
+/* Completion is the one moment Void Violet appears. */
 .progress-fill.is-complete {
-  background: var(--ok);
+  background: var(--accent);
+  box-shadow: var(--glow-sm);
 }
 
 .progress-label {
-  margin-top: 0.35rem;
-  font-size: 0.8rem;
-  color: var(--text-dim);
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-faint);
   font-variant-numeric: tabular-nums;
 }
 
-/* ----------------------------------------------------------- level cards */
+/* ============================================================ level cards */
 
 .level-grid {
   display: grid;
-  gap: 0.85rem;
+  gap: 1rem;
   grid-template-columns: 1fr;
   list-style: none;
-  margin: 0 0 2rem;
+  margin: 0 0 3rem;
   padding: 0;
 }
 
@@ -259,87 +465,117 @@ a:hover {
   }
 }
 
+@media (min-width: 960px) {
+  .level-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .level-card {
+  position: relative;
   display: block;
-  padding: 1.1rem 1.1rem 1.1rem 1.35rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-left: 6px solid var(--belt);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  height: 100%;
+  padding: 1.25rem;
+  background: var(--surface-glass);
+  border-radius: var(--radius-card);
+  box-shadow: var(--lift-card);
   color: inherit;
   text-decoration: none;
-  transition: transform 0.12s ease, border-color 0.12s ease;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Belt-tinted top hairline - the only chromatic edge on the card. */
+.level-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.25rem;
+  right: 1.25rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--belt), transparent);
+  opacity: 0.6;
 }
 
 .level-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--border-strong);
-  border-left-color: var(--belt);
+  transform: translateY(-3px);
+  box-shadow: var(--lift-modal);
 }
 
 .level-card .top {
   display: flex;
-  align-items: baseline;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.5rem;
 }
 
 .level-card h2 {
   margin: 0;
-  font-size: 1.15rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
   letter-spacing: -0.01em;
+  color: var(--text-head);
 }
 
 .level-card .meta {
+  margin: 0 0 1rem;
   color: var(--text-dim);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
 }
 
 .level-card .done-mark {
   margin-left: auto;
-  color: var(--ok);
-  font-weight: 700;
-  font-size: 0.9rem;
+  color: var(--accent-text);
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+  padding: 0.1rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-/* ------------------------------------------------------------- toolbar */
+/* ================================================================ toolbar */
 
 .toolbar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  max-width: var(--maxw-read);
 }
 
 .search-input {
   flex: 1 1 12rem;
   min-height: 38px;
-  padding: 0 0.7rem;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  background: var(--bg-card);
-  color: var(--text);
+  padding: 0 0.85rem;
+  border: 0;
+  border-radius: var(--radius-input);
+  background: rgba(199, 211, 234, 0.06);
+  box-shadow: var(--hairline-strong);
+  color: var(--color-pure-white);
   font: inherit;
   font-size: 0.9rem;
+  transition: box-shadow 0.15s ease;
 }
 
 .search-input::placeholder {
-  color: var(--text-faint);
+  color: var(--text-dim);
+  opacity: 0.6;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 1px rgba(186, 215, 247, 0.4);
 }
 
 .toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
   min-height: 38px;
-  padding: 0 0.7rem;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  background: var(--bg-card);
-  font-size: 0.875rem;
-  cursor: pointer;
+  padding: 0 0.85rem;
+  font-size: 0.8125rem;
+  color: var(--text);
   user-select: none;
   white-space: nowrap;
 }
@@ -347,46 +583,66 @@ a:hover {
 .toggle input {
   accent-color: var(--accent);
   cursor: pointer;
+  width: 16px;
+  height: 16px;
 }
 
-/* -------------------------------------------------------------- groups */
+/* ================================================================= groups */
 
 .group {
-  margin-bottom: 1.75rem;
+  margin-bottom: 3rem;
+  max-width: var(--maxw-read);
 }
 
+.group[hidden] {
+  display: none;
+}
+
+/* The group heading uses the eyebrow pattern: tracked caps between hairlines. */
 .group-head {
-  margin: 0 0 0.6rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--border);
+  margin: 0 0 1rem;
 }
 
 .group-head h2 {
-  margin: 0;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 0.4rem;
+  font-family: var(--font-eyebrow);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.group-head h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--edge), transparent);
 }
 
 .group-head .jp {
-  color: var(--text-dim);
-  font-weight: 400;
-  font-size: 0.95rem;
+  font-family: var(--font-ja);
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-faint);
 }
 
 .group-head .en {
   display: block;
-  margin-top: 0.1rem;
-  color: var(--text-dim);
-  font-size: 0.82rem;
-  font-weight: 400;
+  color: var(--text-faint);
+  font-size: 0.8125rem;
 }
 
 .group-head .parent {
   color: var(--text-faint);
-  font-size: 0.78rem;
+  opacity: 0.75;
 }
 
-/* ------------------------------------------------------------ tech list */
+/* =========================================================== technique row */
 
 .tech-list {
   list-style: none;
@@ -394,19 +650,22 @@ a:hover {
   padding: 0;
   display: grid;
   gap: 0.5rem;
+  max-width: var(--maxw-read);
 }
 
 .tech {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: var(--surface-glass);
+  border-radius: var(--radius-card);
+  box-shadow: var(--lift-card);
   overflow: hidden;
+  transition: box-shadow 0.2s ease;
 }
 
+/* Learned rows step back: violet hairline, dimmed title, no extra fill. */
 .tech.is-done {
-  border-color: var(--ok);
-  background: color-mix(in srgb, var(--ok) 6%, var(--bg-card));
+  background: rgba(102, 58, 243, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(102, 58, 243, 0.45),
+    inset 0 1px 1px rgba(216, 236, 248, 0.12);
 }
 
 .tech[hidden] {
@@ -416,16 +675,16 @@ a:hover {
 .tech-main {
   display: flex;
   align-items: flex-start;
-  gap: 0.7rem;
-  padding: 0.75rem 0.85rem;
+  gap: 0.85rem;
+  padding: 1rem;
 }
 
 .tech-check {
   flex: none;
-  width: 22px;
-  height: 22px;
-  margin: 0.15rem 0 0;
-  accent-color: var(--ok);
+  width: 20px;
+  height: 20px;
+  margin: 0.1rem 0 0;
+  accent-color: var(--accent);
   cursor: pointer;
 }
 
@@ -438,20 +697,23 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.4rem 0.5rem;
+  gap: 0.4rem 0.6rem;
 }
 
 .tech-romaji {
-  font-weight: 600;
-  font-size: 1.02rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.0625rem;
   letter-spacing: -0.01em;
+  color: var(--text-head);
   cursor: pointer;
 }
 
 .tech.is-done .tech-romaji {
-  color: var(--text-dim);
+  color: var(--text-faint);
   text-decoration: line-through;
   text-decoration-thickness: 1px;
+  text-decoration-color: var(--accent);
 }
 
 .tech-kanji {
@@ -461,91 +723,91 @@ a:hover {
 
 .tech-en {
   display: block;
-  margin-top: 0.1rem;
+  margin-top: 0.2rem;
   color: var(--text-dim);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
 }
 
 .tech-aka {
   display: block;
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
   color: var(--text-faint);
-  font-size: 0.78rem;
+  font-size: 0.8125rem;
 }
 
-/* ---------------------------------------------------------- tech actions */
+/* =========================================================== row actions */
 
 .tech-actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.4rem;
-  margin-top: 0.55rem;
+  margin-top: 0.75rem;
 }
 
 .act {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  min-height: 32px;
-  padding: 0 0.6rem;
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  background: var(--bg-card);
+  min-height: 30px;
+  padding: 0 0.7rem;
+  background: transparent;
+  box-shadow: var(--hairline-strong);
   color: var(--text-dim);
-  font: inherit;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
   text-decoration: none;
-  cursor: pointer;
   white-space: nowrap;
-  transition: background-color 0.12s ease, color 0.12s ease;
 }
 
 .act:hover {
-  background: var(--bg-sunken);
-  color: var(--text);
+  background: var(--surface-wash);
+  color: var(--color-pure-white);
 }
 
 .act.is-speaking {
   background: var(--accent);
-  border-color: var(--accent);
+  box-shadow: none;
   color: var(--accent-text);
 }
 
 .act[disabled] {
-  opacity: 0.45;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
-/* --------------------------------------------------------------- badges */
+.act[disabled]:hover {
+  background: transparent;
+  color: var(--text-dim);
+}
+
+/* ================================================================= badges */
 
 .badge {
   display: inline-block;
-  padding: 0.05rem 0.45rem;
-  border-radius: 999px;
-  background: var(--bg-sunken);
-  color: var(--text-dim);
-  font-size: 0.7rem;
-  font-weight: 600;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-input);
+  background: rgba(199, 211, 234, 0.12);
+  box-shadow: var(--hairline);
+  color: var(--color-frost-glow);
+  font-size: 0.6875rem;
+  font-weight: 500;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  vertical-align: 1px;
 }
 
 .badge-variant {
-  background: color-mix(in srgb, var(--accent) 14%, var(--bg-sunken));
-  color: var(--accent);
+  color: var(--color-ice-highlight);
 }
 
 .badge-related {
   text-transform: none;
   letter-spacing: 0;
-  font-weight: 500;
+  color: var(--text-faint);
+  background: transparent;
 }
 
-/* ---------------------------------------------------------- video embed */
+/* =========================================================== video embed */
 
 .tech-embed {
-  padding: 0 0.85rem 0.85rem;
+  padding: 0 1rem 1rem;
 }
 
 .tech-embed[hidden] {
@@ -556,7 +818,8 @@ a:hover {
   position: relative;
   aspect-ratio: 16 / 9;
   background: #000;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-input);
+  box-shadow: var(--hairline);
   overflow: hidden;
 }
 
@@ -568,52 +831,64 @@ a:hover {
   border: 0;
 }
 
-/* -------------------------------------------------------------- glossary */
+/* =============================================================== glossary */
 
-.term {
+/* Term rows reuse the .tech card; .term only tightens the internal rhythm,
+   because a term carries a meaning paragraph instead of video actions. */
+.term .tech-main {
   padding: 0.85rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.term.is-done {
-  border-color: var(--ok);
-  background: color-mix(in srgb, var(--ok) 6%, var(--bg-card));
 }
 
 .term-meaning {
   margin: 0.4rem 0 0;
   color: var(--text-dim);
-  font-size: 0.88rem;
+  font-size: 0.875rem;
 }
 
 .term-syllables {
   color: var(--text-faint);
-  font-size: 0.78rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  font-family: var(--font-eyebrow);
+  letter-spacing: 0.02em;
 }
 
 .term-children {
   list-style: none;
-  margin: 0.6rem 0 0;
-  padding: 0 0 0 0.85rem;
-  border-left: 2px solid var(--border);
+  margin: 0 1rem 1rem 2.85rem;
+  padding: 0;
   display: grid;
   gap: 0.4rem;
 }
 
-/* ----------------------------------------------------------------- misc */
+/* Nested rows sit inside a parent card, so they drop their own elevation. */
+.term-children .tech {
+  background: var(--surface-wash);
+  box-shadow: var(--hairline);
+}
+
+.term-children .tech.is-done {
+  background: rgba(102, 58, 243, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(102, 58, 243, 0.45);
+}
+
+.term-children .tech-main {
+  padding: 0.6rem 0.75rem;
+}
+
+.term-children .tech-romaji {
+  font-size: 0.9375rem;
+}
+
+/* =================================================================== misc */
 
 .notice {
-  margin: 0 0 1rem;
-  padding: 0.6rem 0.8rem;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  background: var(--bg-sunken);
+  margin: 1.25rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-input);
+  background: var(--surface-wash);
+  box-shadow: var(--hairline);
   color: var(--text-dim);
-  font-size: 0.82rem;
+  font-size: 0.8125rem;
 }
 
 .notice[hidden] {
@@ -621,9 +896,9 @@ a:hover {
 }
 
 .empty {
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   text-align: center;
-  color: var(--text-dim);
+  color: var(--text-faint);
   font-size: 0.9rem;
 }
 
@@ -635,17 +910,33 @@ a:hover {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
   font-size: 0.875rem;
+  border-top: 1px solid var(--edge);
+}
+
+.level-nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+}
+
+.level-nav a:hover {
+  color: var(--text-head);
 }
 
 .site-footer {
   max-width: var(--maxw);
-  margin: 3rem auto 0;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border);
+  margin: 5rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--edge);
   color: var(--text-faint);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
+}
+
+.site-footer .wrap {
+  max-width: var(--maxw-read);
+  margin: 0;
 }
 
 .site-footer a {
@@ -670,5 +961,9 @@ a:hover {
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+
+  .level-card:hover {
+    transform: none;
   }
 }

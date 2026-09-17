@@ -1,4 +1,4 @@
-/* Judo Kyu Guide - Japanese pronunciation via the Web Speech API.
+/* JC Dojo Kyiv Kyu Guide - Japanese pronunciation via the Web Speech API.
 
    Speaks the kanji when available, because a ja-JP voice reads kanji with the
    correct pitch and vowel length. Romaji is only a fallback: an English voice

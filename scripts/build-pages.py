@@ -19,30 +19,25 @@ HEAD = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{description}">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#05060f">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>
-/* Applied before first paint so a saved dark theme does not flash white. */
-try {{
-  var t = localStorage.getItem('kyu:theme');
-  if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
-}} catch (e) {{}}
-</script>
 </head>
 <body data-page="{page}"{body_attrs}>
 
 <div class="wrap">
   <header class="site-header">
-    <a class="brand" href="index.html">Judo Kyu Guide</a>
+    <a class="brand" href="index.html">JC Dojo Kyiv Kyu Guide</a>
     <span class="spacer"></span>
     <a class="btn" href="glossary.html">Glossary</a>
-    <button class="btn btn-icon" type="button" data-theme-toggle aria-label="Switch theme"></button>
   </header>
 
   <nav class="breadcrumb"><a href="index.html">All levels</a> &rsaquo; {crumb}</nav>
 
   <p class="notice" data-storage-notice hidden></p>
 
-  <section class="page-head" data-page-head style="--belt: {belt_hex}; --belt-text: {belt_text};">
+  <section class="page-head" data-page-head style="--belt: {belt_hex};">
+    <p class="eyebrow is-start">{eyebrow}</p>
     <h1>{heading}</h1>
     <p class="sub">{sub}</p>
     <div class="progress" data-level-progress>
@@ -136,13 +131,14 @@ def build_level_page(level, prev_level, next_level):
         body = "\n  <div data-groups></div>\n"
 
     html = HEAD.format(
-        title="%s kyu - %s belt - Judo Kyu Guide" % (level["ordinal"], belt["name"]),
+        title="%s kyu - %s belt - JC Dojo Kyiv Kyu Guide"
+        % (level["ordinal"], belt["name"]),
         description=description,
         page="level",
         body_attrs=' data-kyu="%d"' % level["kyu"],
         crumb="%s kyu" % level["ordinal"],
         belt_hex=belt["hex"],
-        belt_text=belt["text"],
+        eyebrow="Grading %d of 6" % (7 - level["kyu"]),
         heading='%s kyu <span class="belt-chip">%s belt</span>'
         % (level["ordinal"], belt["name"]),
         sub=sub,
@@ -158,14 +154,14 @@ def build_level_page(level, prev_level, next_level):
 
 def build_glossary(total_terms):
     html = HEAD.format(
-        title="Glossary - every judo term - Judo Kyu Guide",
+        title="Glossary - every judo term - JC Dojo Kyiv Kyu Guide",
         description="Every Japanese judo term used across the kyu gradings, in "
         "alphabetical order, with kanji, meaning and pronunciation.",
         page="glossary",
         body_attrs="",
         crumb="Glossary",
-        belt_hex="#b3271f",
-        belt_text="#ffffff",
+        belt_hex="#c7d3ea",
+        eyebrow="Every term, A to Z",
         heading="Glossary",
         sub="All %d terms in alphabetical order, with kanji, syllables and meaning. "
         "Tap <strong>Say it</strong> to hear the Japanese pronunciation." % total_terms,

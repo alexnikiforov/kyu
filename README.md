@@ -1,4 +1,4 @@
-# Judo Kyu Guide
+# JC Dojo Kyiv Kyu Guide
 
 A static checklist of every judo technique and Japanese term required for each
 kyu grading, from 6th kyu (white belt) to 1st kyu (brown belt).
@@ -7,8 +7,23 @@ kyu grading, from 6th kyu (white belt) to 1st kyu (brown belt).
 - Every technique links to its **Kodokan Judo Institute** demonstration video
 - **Japanese pronunciation** via the browser's speech synthesis (reads the kanji)
 - **Checkboxes with progress bars**, saved in `localStorage`
-- Search, "not learned only" filter, light/dark theme
+- Search and a "not learned only" filter
 - No frameworks, no build step, no dependencies - plain HTML, CSS and JS
+
+## Design
+
+Dark-only, built on the tokens in `design.md` ("frosted glass cathedral at
+midnight"): a near-black canvas with a blueprint grid, frosted-glass cards, and
+one violet accent. Two rules run through the stylesheet:
+
+- borders are `inset 0 0 0 1px` shadows, never solid strokes;
+- elevation is inset highlight + inset glow + cool drop, never a plain shadow.
+
+Belt colours are kept as a **signal only** - an 8px dot and the progress bar
+fill - so they do not fight the monochrome palette. Violet (`#663af3`) is
+reserved for the learned/complete state. Fonts are system stacks (Avenir Next
+for display, Menlo for eyebrow labels), so nothing is fetched over the network
+and the page still renders offline and from `file://`.
 
 ## Using it
 
@@ -47,8 +62,9 @@ index.html            6 belt cards + overall progress
 5-kyu.html .. 1-kyu.html   techniques per level
 glossary.html         all terms, alphabetical
 404.html
+design.md             the design system this UI implements
 assets/css/style.css  one stylesheet, CSS custom properties
-assets/js/store.js    localStorage with in-memory fallback, theme
+assets/js/store.js    localStorage with in-memory fallback
 assets/js/speech.js   Japanese speech synthesis
 assets/js/render.js   DOM builders (createElement only, never innerHTML)
 assets/js/app.js      page controllers, filters, progress

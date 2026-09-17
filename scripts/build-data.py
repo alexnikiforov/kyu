@@ -26,12 +26,15 @@ SRC = ROOT / "data" / "source"
 OUT = ROOT / "data"
 
 BELTS = {
-    6: {"name": "White", "hex": "#E8E8E8", "text": "#1a1a1a"},
-    5: {"name": "Yellow", "hex": "#F2C14E", "text": "#1a1a1a"},
-    4: {"name": "Orange", "hex": "#E8833A", "text": "#1a1a1a"},
-    3: {"name": "Green", "hex": "#4C9A5B", "text": "#ffffff"},
-    2: {"name": "Blue", "hex": "#3B76B8", "text": "#ffffff"},
-    1: {"name": "Brown", "hex": "#7A5237", "text": "#ffffff"},
+    # Belt hues are desaturated to sit inside the cool midnight palette. They
+    # only ever appear as a small dot and the progress-bar fill, never as a
+    # filled surface, so no paired foreground colour is needed.
+    6: {"name": "White", "hex": "#dfe7f2"},
+    5: {"name": "Yellow", "hex": "#d8bd6a"},
+    4: {"name": "Orange", "hex": "#cf8352"},
+    3: {"name": "Green", "hex": "#5f9e79"},
+    2: {"name": "Blue", "hex": "#5b8fc9"},
+    1: {"name": "Brown", "hex": "#9c7a5f"},
 }
 
 ORDINAL = {6: "6th", 5: "5th", 4: "4th", 3: "3rd", 2: "2nd", 1: "1st"}
