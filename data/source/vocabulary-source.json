@@ -1,0 +1,180 @@
+{
+  "_comment": "MANUAL source file for the glossary. Add new terms here and re-run scripts/build-data.py. 'kyu' controls which level page shows the term. Typos from kyu.txt fixed: Dubon -> Zubon, Taketa -> Toketa, cyrillic Ippon -> Ippon.",
+  "terms": [
+    {
+      "romaji": "Judo",
+      "kanji": "柔道",
+      "syllables": "Ju-do",
+      "en": "The way of gentleness",
+      "meaning": "A martial art and Olympic sport that originated in Japan. \"Ju\" means gentle or yielding, \"do\" means way. Founded by Jigoro Kano in 1882.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Judoka",
+      "kanji": "柔道家",
+      "syllables": "Ju-do-ka",
+      "en": "Judo practitioner",
+      "meaning": "A person who practises judo.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Dojo",
+      "kanji": "道場",
+      "syllables": "Do-jo",
+      "en": "Training hall",
+      "meaning": "The hall where judoka train.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Hajime",
+      "kanji": "始め",
+      "syllables": "Ha-ji-me",
+      "en": "Begin",
+      "meaning": "Command to start the contest.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Matte",
+      "kanji": "待て",
+      "syllables": "Ma-tte",
+      "en": "Wait / stop",
+      "meaning": "Command to stop the contest temporarily.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Ippon",
+      "kanji": "一本",
+      "syllables": "Ip-pon",
+      "en": "One full point",
+      "meaning": "A clean victory — the highest score in judo.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Waza-ari",
+      "kanji": "技あり",
+      "syllables": "Wa-za-a-ri",
+      "en": "Half point",
+      "meaning": "A score of half a point in judo.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Yuko",
+      "kanji": "有効",
+      "syllables": "Yu-ko",
+      "en": "Minor score",
+      "meaning": "The smallest score in judo (no longer used in current IJF rules, still taught).",
+      "kyu": 6
+    },
+    {
+      "romaji": "Rei",
+      "kanji": "礼",
+      "syllables": "Rei",
+      "en": "Bow",
+      "meaning": "A bow — a sign of respect towards the coach, the hall and the opponent.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Shido",
+      "kanji": "指導",
+      "syllables": "Shi-do",
+      "en": "Penalty / warning",
+      "meaning": "A warning for breaking the rules: passivity (avoiding the fight), unsporting behaviour, or breach of etiquette. The first shido has no serious consequence, but three shido result in defeat by hansoku-make.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Hansoku-make",
+      "kanji": "反則負け",
+      "syllables": "Han-so-ku-ma-ke",
+      "en": "Disqualification",
+      "meaning": "Defeat by disqualification, also awarded after three shido.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Osae-komi",
+      "kanji": "抑え込み",
+      "syllables": "O-sa-e-ko-mi",
+      "en": "Hold is on",
+      "meaning": "Announced when a hold-down of the opponent on their back is effective.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Toketa",
+      "kanji": "解けた",
+      "syllables": "To-ke-ta",
+      "en": "Hold is broken",
+      "meaning": "Announced in two situations: the opponent escapes the hold-down, or a score or penalty is cancelled.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Uchi-komi",
+      "kanji": "打ち込み",
+      "syllables": "U-chi-ko-mi",
+      "en": "Repetition training",
+      "meaning": "A drill of repeated entries into a throw without completing the throw itself.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Ukemi",
+      "kanji": "受け身",
+      "syllables": "U-ke-mi",
+      "en": "Breakfall",
+      "meaning": "The technique of falling safely, used in judo to avoid injury.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Kumi-kata",
+      "kanji": "組み方",
+      "syllables": "Ku-mi-ka-ta",
+      "en": "Gripping",
+      "meaning": "The grip — the way of holding the opponent's judogi.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Tai-sabaki",
+      "kanji": "体さばき",
+      "syllables": "Tai-sa-ba-ki",
+      "en": "Body movement",
+      "meaning": "Turning and shifting the body to evade or to attack.",
+      "kyu": 6
+    },
+    {
+      "romaji": "Judo-gi",
+      "kanji": "柔道着",
+      "syllables": "Ju-do-gi",
+      "en": "Judo uniform",
+      "meaning": "The special clothing worn for judo. It consists of three parts.",
+      "kyu": 6,
+      "children": [
+        {
+          "romaji": "Uwagi",
+          "kanji": "上衣",
+          "syllables": "U-wa-gi",
+          "en": "Jacket",
+          "meaning": "The upper part of the judogi."
+        },
+        {
+          "romaji": "Zubon",
+          "kanji": "ズボン",
+          "syllables": "Zu-bon",
+          "en": "Trousers",
+          "meaning": "The trousers of the judogi."
+        },
+        {
+          "romaji": "Obi",
+          "kanji": "帯",
+          "syllables": "O-bi",
+          "en": "Belt",
+          "meaning": "The belt, whose colour shows the grade."
+        }
+      ]
+    },
+    {
+      "romaji": "Yoshi",
+      "kanji": "よし",
+      "syllables": "Yo-shi",
+      "en": "Continue",
+      "meaning": "Signal to resume the contest.",
+      "kyu": 6
+    }
+  ]
+}

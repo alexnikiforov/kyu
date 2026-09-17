@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found - Judo Kyu Guide</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script>
+try {
+  var t = localStorage.getItem('kyu:theme');
+  if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+} catch (e) {}
+</script>
+</head>
+<body data-page="404">
+
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="/">Judo Kyu Guide</a>
+    <span class="spacer"></span>
+    <button class="btn btn-icon" type="button" data-theme-toggle aria-label="Switch theme"></button>
+  </header>
+
+  <section class="page-head" style="--belt: #b3271f; --belt-text: #ffffff;">
+    <h1>Ippon for the URL</h1>
+    <p class="sub">That page does not exist. Here is where you can go instead:</p>
+  </section>
+
+  <ul class="level-grid">
+    <li><a class="level-card" href="/" style="--belt: #b3271f;">
+      <div class="top"><h2>All levels</h2></div>
+      <p class="meta">The 6 gradings, from 6th to 1st kyu</p>
+    </a></li>
+    <li><a class="level-card" href="/glossary.html" style="--belt: #b3271f;">
+      <div class="top"><h2>Glossary</h2></div>
+      <p class="meta">Every Japanese term in one alphabetical list</p>
+    </a></li>
+  </ul>
+</div>
+
+<script src="/assets/js/store.js"></script>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

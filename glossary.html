@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossary - every judo term - Judo Kyu Guide</title>
+<meta name="description" content="Every Japanese judo term used across the kyu gradings, in alphabetical order, with kanji, meaning and pronunciation.">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+/* Applied before first paint so a saved dark theme does not flash white. */
+try {
+  var t = localStorage.getItem('kyu:theme');
+  if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+} catch (e) {}
+</script>
+</head>
+<body data-page="glossary">
+
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="index.html">Judo Kyu Guide</a>
+    <span class="spacer"></span>
+    <a class="btn" href="glossary.html">Glossary</a>
+    <button class="btn btn-icon" type="button" data-theme-toggle aria-label="Switch theme"></button>
+  </header>
+
+  <nav class="breadcrumb"><a href="index.html">All levels</a> &rsaquo; Glossary</nav>
+
+  <p class="notice" data-storage-notice hidden></p>
+
+  <section class="page-head" data-page-head style="--belt: #b3271f; --belt-text: #ffffff;">
+    <h1>Glossary</h1>
+    <p class="sub">All 22 terms in alphabetical order, with kanji, syllables and meaning. Tap <strong>Say it</strong> to hear the Japanese pronunciation.</p>
+    <div class="progress" data-level-progress>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <div class="progress-label"></div>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <input class="search-input" type="search" data-search placeholder="Search the glossary..." aria-label="Search the glossary...">
+    <label class="toggle">
+      <input type="checkbox" data-unlearned>
+      <span>Not learned only</span>
+    </label>
+    <button class="btn" type="button" data-reset-level>Reset</button>
+  </div>
+
+  <p class="empty" data-empty hidden>Nothing matches your filters.</p>
+
+  <ul class="tech-list" data-glossary></ul>
+
+  <nav class="level-nav">
+    <a href="index.html">&larr; All levels</a>
+    <a href="6-kyu.html">6th kyu &rarr;</a>
+  </nav>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      Videos by the
+      <a href="https://www.youtube.com/@kodokanjudoinstitute" target="_blank" rel="noopener noreferrer">Kodokan Judo Institute</a>.
+      Tap <strong>Say it</strong> to hear a name in Japanese - your device needs a Japanese voice installed.
+    </p>
+  </div>
+</footer>
+
+<script src="data/techniques.js"></script>
+<script src="data/vocabulary.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/speech.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

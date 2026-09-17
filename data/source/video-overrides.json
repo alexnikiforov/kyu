@@ -1,0 +1,10 @@
+{
+  "_comment": "MANUAL FILE - edit freely. Keys are technique ids from data/techniques.js. The build script always applies these last, so your fixes are never overwritten when data is regenerated.",
+  "_example": {
+    "1-kyu/ashi-hishigi": {
+      "videoId": "REPLACE_ME",
+      "match": "exact"
+    }
+  },
+  "overrides": {}
+}

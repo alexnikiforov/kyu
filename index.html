@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-init>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Judo Kyu Guide - techniques and terms for every grading</title>
+<meta name="description" content="Checklists of the judo techniques and Japanese terms required for each kyu grading, from 6th to 1st kyu, with Kodokan demonstration videos and Japanese pronunciation.">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+/* Applied before first paint so a saved dark theme does not flash white. */
+try {
+  var t = localStorage.getItem('kyu:theme');
+  if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+} catch (e) {}
+</script>
+</head>
+<body data-page="home">
+
+<div class="wrap">
+  <header class="site-header">
+    <span class="brand">Judo Kyu Guide</span>
+    <span class="spacer"></span>
+    <a class="btn" href="glossary.html">Glossary</a>
+    <button class="btn btn-icon" type="button" data-theme-toggle aria-label="Switch theme"></button>
+  </header>
+
+  <p class="notice" data-storage-notice hidden></p>
+
+  <section class="page-head" data-page-head>
+    <h1>Judo Kyu Guide</h1>
+    <p class="sub">
+      Everything you need to know for each grading, from 6th to 1st kyu:
+      116 techniques and 19 Japanese terms. Tick what you have learned - your
+      progress is saved in this browser.
+    </p>
+    <div class="progress" data-overall-progress>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <div class="progress-label"></div>
+    </div>
+  </section>
+
+  <h2 class="visually-hidden">Grading levels</h2>
+  <ul class="level-grid" data-level-grid></ul>
+
+  <p>
+    <button class="btn" type="button" data-reset-all>Reset all progress</button>
+  </p>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      Videos by the
+      <a href="https://www.youtube.com/@kodokanjudoinstitute" target="_blank" rel="noopener noreferrer">Kodokan Judo Institute</a>.
+      Pronunciation uses your browser's Japanese voice, so it needs one installed.
+      Technique names follow official Kodokan romanisation.
+    </p>
+  </div>
+</footer>
+
+<script src="data/techniques.js"></script>
+<script src="data/vocabulary.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/speech.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
